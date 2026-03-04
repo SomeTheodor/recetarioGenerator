@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Recetas{% endblock %}
+
+{% block content %}
+
+<div class="card">
+    <h1>Nueva receta</h1>
+
+    <form method="POST" action="{{ url_for('main.crear') }}">
+        <input type="text" name="nombre" placeholder="Nombre" required>
+
+        <select name="categoria">
+            <option value="Comidas">Comidas</option>
+            <option value="Bebidas">Bebidas</option>
+            <option value="Postres">Postres</option>
+        </select>
+
+        <textarea name="ingredientes" placeholder="Un ingrediente por línea" required></textarea>
+        <textarea name="pasos" placeholder="Un paso por línea" required></textarea>
+
+        <button type="submit">Guardar receta</button>
+    </form>
+</div>
+
+<div class="card">
+    <h2>Recetas guardadas</h2>
+
+    {% for categoria, recetas_categoria in recetas_por_categoria.items() %}
+        <div class="categoria">
+            <h3>{{ categoria }}</h3>
+
+            {% for receta in recetas_categoria %}
+                <div class="receta-item">
+                    <span>{{ receta.nombre }}</span>
+                    <a href="{{ url_for('main.pdf', receta_id=receta.id) }}">
+                        Generar PDF
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
