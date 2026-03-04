@@ -1,0 +1,48 @@
+{
+    "recetas": [
+        {
+            "id": 1,
+            "nombre": "espresso",
+            "autor": "theo",
+            "fecha": "2026-03-02",
+            "ingredientes": [
+                "20gr Cafe\r",
+                "Agua caliente\r",
+                "maquina espresso"
+            ],
+            "pasos": [
+                "poner el cafe molido a la maquina\r",
+                "extraer cafe\r",
+                "disfrutar"
+            ]
+        },
+        {
+            "id": 2,
+            "nombre": "dddd",
+            "categoria": "Bebidas",
+            "fecha": "2026-03-02",
+            "ingredientes": [
+                "dddd"
+            ],
+            "pasos": [
+                "dddd"
+            ]
+        },
+        {
+            "id": 3,
+            "nombre": "Tiramisu",
+            "categoria": "Postres",
+            "fecha": "2026-03-03",
+            "ingredientes": [
+                "Vainillas\r",
+                "Queso mascarpone\r",
+                "cafe"
+            ],
+            "pasos": [
+                "untar cafe en las vainillas\r",
+                "poner queso en las vainillas\r",
+                "repetir"
+            ]
+        }
+    ]
+}

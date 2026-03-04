@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Recetas</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 40px auto;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        form input,
+        form select,
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        form textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .categoria {
+            margin-top: 20px;
+        }
+
+        .receta-item {
+            background: #f9f9f9;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .receta-item a {
+            text-decoration: none;
+            color: #2196F3;
+            font-weight: bold;
+        }
+
+        .receta-item a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="card">
+        <h1>Nueva receta</h1>
+
+        <form method="POST" action="/crear">
+            <input type="text" name="nombre" placeholder="Nombre" required>
+
+            <select name="categoria">
+                <option value="Comidas">Comidas</option>
+                <option value="Bebidas">Bebidas</option>
+                <option value="Postres">Postres</option>
+            </select>
+
+            <textarea name="ingredientes" placeholder="Un ingrediente por línea" required></textarea>
+
+            <textarea name="pasos" placeholder="Un paso por línea" required></textarea>
+
+            <button type="submit">Guardar receta</button>
+        </form>
+    </div>
+
+    <div class="card">
+        <h2>Recetas guardadas</h2>
+
+        {% set categorias = recetas | map(attribute='categoria') | list | unique %}
+
+        {% for categoria in categorias %}
+            <div class="categoria">
+                <h3>{{ categoria }}</h3>
+                <ul style="list-style: none; padding: 0;">
+                    {% for receta in recetas %}
+                        {% if receta.categoria == categoria %}
+                            <li class="receta-item">
+                                <span>{{ receta.nombre }}</span>
+                                <a href="/pdf/{{ receta.id }}">Generar PDF</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+</body>
+</html>
